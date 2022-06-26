@@ -1,17 +1,17 @@
-import 'package:apps_education/constants/setting_Reusable.dart';
-import 'package:apps_education/models/email_user.dart';
-import 'package:apps_education/repository/api_auth.dart';
-import 'package:apps_education/view/main_page.dart';
-import 'package:apps_education/view/register_page.dart';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:apps_education/component/button.dart';
+import 'package:latsol/constants/r.dart';
+import 'package:latsol/helpers/preference_helper.dart';
+import 'package:latsol/models/network_response.dart';
+import 'package:latsol/models/user_by_email.dart';
+import 'package:latsol/repository/auth_api.dart';
+import 'package:latsol/view/main_page.dart';
+import 'package:latsol/view/register_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:apps_education/helpers/preference_helper.dart';
-
-import '../models/network_response.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -54,41 +54,42 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Setting_Reusable.color.backgroundLogin,
+      backgroundColor: Color(0xfff3f7f8),
       body: Padding(
-        padding: const EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           children: [
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                Setting_Reusable.strings.login,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                R.strings.login,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
-            const SizedBox(height: 20),
-            Image.asset(Setting_Reusable.asset.imgLogin),
-            const SizedBox(
-              height: 35,
-            ),
+            SizedBox(height: 20),
+            Image.asset(R.assets.imgLogin),
+            SizedBox(height: 35),
             Text(
-              Setting_Reusable.strings.welcome,
-              style: const TextStyle(
+              R.strings.welcome,
+              style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
               ),
             ),
-            Text(Setting_Reusable.strings.loginDescription,
-                textAlign: TextAlign.center,
-                style: GoogleFonts.poppins().copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Setting_Reusable.color.greySubtitle)),
-            const Spacer(),
+            Text(
+              R.strings.loginDescription,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins().copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: R.colors.greySubtitle,
+              ),
+            ),
+            Spacer(),
             ButtonLogin(
-              backgroundColor: Colors.white,
-              borderColor: Setting_Reusable.color.primary,
               onTap: () async {
                 await signInWithGoogle();
 
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                 if (user != null) {
                   final dataUser = await AuthApi().getUserByEmail();
                   if (dataUser.status == Status.success) {
-                    final data = EmailUser.fromJson(dataUser.data!);
+                    final data = UserByEmail.fromJson(dataUser.data!);
                     if (data.status == 1) {
                       await PreferenceHelper().setUserData(data.data!);
                       Navigator.of(context).pushNamed(MainPage.route);
@@ -105,74 +106,93 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text("Gagal Masuk"),
                     duration: Duration(seconds: 2),
                   ));
                 }
               },
-              radius: null,
+              backgroundColor: Colors.white,
+              borderColor: R.colors.primary,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(Setting_Reusable.asset.icGoogle),
-                  const SizedBox(
-                    width: 15,
-                  ),
+                  Image.asset(R.assets.icGoogle),
+                  SizedBox(width: 15),
                   Text(
-                    Setting_Reusable.strings.loginWithGoogle,
+                    R.strings.loginWithGoogle,
                     style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15,
-                        color: Setting_Reusable.color.blackLogin),
-                  )
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: R.colors.blackLogin,
+                    ),
+                  ),
                 ],
               ),
             ),
+            // GridView.count(
+            //   shrinkWrap: true,
+            //   physics: NeverScrollableScrollPhysics(),
+            //   gridDelegate: gridDelegate, crossAxisCount: null,),
             ButtonLogin(
-                onTap: () async {
-                  await signInWithGoogle();
-
-                  final user = FirebaseAuth.instance.currentUser;
-                  if (user != null) {
-                    final dataUser = await AuthApi().getUserByEmail();
-                    if (dataUser.status == Status.success) {
-                      final data = EmailUser.fromJson(dataUser.data!);
-                      if (data.status == 1) {
-                        await PreferenceHelper().setUserData(data.data!);
-                        Navigator.of(context).pushNamed(MainPage.route);
-                      } else {
-                        Navigator.of(context).pushNamed(RegisterPage.route);
-                      }
-                    }
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text("Gagal Masuk"),
-                      duration: Duration(seconds: 2),
-                    ));
-                  }
-                },
-                backgroundColor: Colors.black,
-                borderColor: Colors.black,
-                radius: null,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(Setting_Reusable.asset.icAple),
-                    const SizedBox(
-                      width: 15,
+              onTap: () {},
+              backgroundColor: Colors.black,
+              borderColor: Colors.black,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(R.assets.icAple),
+                  SizedBox(width: 15),
+                  Text(
+                    R.strings.loginWithApple,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     ),
-                    Text(
-                      Setting_Reusable.strings.loginWithApple,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
-                          color: Colors.white),
-                    )
-                  ],
-                ))
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ButtonLogin extends StatelessWidget {
+  const ButtonLogin({
+    Key? key,
+    required this.backgroundColor,
+    required this.child,
+    required this.borderColor,
+    required this.onTap, this.radius,
+  }) : super(key: key);
+  final double? radius;
+  final Color backgroundColor;
+  final Widget child;
+  final Color borderColor;
+  final Function()? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: backgroundColor,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular( radius ?? 25),
+            side: BorderSide(
+              color: borderColor,
+            ),
+          ),
+          fixedSize: Size(MediaQuery.of(context).size.width * 0.8, 50),
+        ),
+        onPressed: onTap,
+        child: child,
       ),
     );
   }

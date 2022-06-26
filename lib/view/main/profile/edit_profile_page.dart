@@ -8,16 +8,16 @@ import 'package:latsol/repository/auth_api.dart';
 import 'package:latsol/view/login_page.dart';
 import 'package:latsol/view/main_page.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({Key? key}) : super(key: key);
   static String route = "register_page";
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 enum Gender { lakiLaki, perempuan }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _EditProfilePageState extends State<EditProfilePage> {
   List<String> classSlta = ["10", "11", "12"];
 
   String gender = "Laki-laki";
@@ -35,9 +35,16 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {});
   }
 
-  initDataUSer() {
+  initDataUSer() async {
     emailController.text = UserEmail.getUserEmail()!;
-    fullNameController.text = UserEmail.getUserDisplayName()!;
+    // fullNameController.text = UserEmail.getUserDisplayName()!;
+   final dataUser = await PreferenceHelper().getUserData();
+    fullNameController.text = dataUser!.userName!;
+    schoolNameController.text = dataUser.userAsalSekolah!;
+    gender = dataUser.userGender!;
+    // selectedClass = dataUser.jenjang!;
+    print(dataUser.userGender!);
+
     setState(() {});
   }
 
@@ -50,28 +57,27 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff0f3f5),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight + 20),
-        child: AppBar(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(25.0),
-                  bottomRight: Radius.circular(25.0))),
-          elevation: 0,
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(color: Colors.black),
-          title: Text(
-            "Yuk isi data diri!",
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w700, fontSize: 18),
-          ),
+      // backgroundColor: Color(0xfff0f3f5),
+      appBar: AppBar(
+        // shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.only(
+        //         bottomLeft: Radius.circular(25.0),
+        //         bottomRight: Radius.circular(25.0))),
+        elevation: 0,
+        // backgroundColor: Colors.white,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
+        title: Text(
+          "Edit Akun",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18),
         ),
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(bottom: 20.0),
           child: ButtonLogin(
+            radius: 8,
             onTap: () async {
               final json = {
                 "email": emailController.text,
@@ -82,13 +88,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 "foto": UserEmail.getUserPhotoUrl(),
               };
               print(json);
-              final result = await AuthApi().postRegister(json);
+              final result = await AuthApi().postUpdateUSer(json);
               if (result.status == Status.success) {
                 final registerResult = UserByEmail.fromJson(result.data!);
                 if (registerResult.status == 1) {
                   await PreferenceHelper().setUserData(registerResult.data!);
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      MainPage.route, (context) => false);
+                  Navigator.pop(context, true);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -107,9 +112,9 @@ class _RegisterPageState extends State<RegisterPage> {
             backgroundColor: R.colors.primary,
             borderColor: R.colors.primary,
             child: Text(
-              R.strings.daftar,
+              R.strings.perbaharuiAkun,
               style: TextStyle(
-                fontSize: 17,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -123,13 +128,13 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RegisterTextField(
+              EditProfileTextField(
                 controller: emailController,
                 hintText: 'Email Anda',
                 title: "Email",
                 enabled: false,
               ),
-              RegisterTextField(
+              EditProfileTextField(
                 hintText: 'Nama Lengkap Anda',
                 title: "Nama Lengkap",
                 controller: fullNameController,
@@ -138,9 +143,9 @@ class _RegisterPageState extends State<RegisterPage> {
               Text(
                 "Jenis Kelamin",
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: R.colors.greySubtitle),
               ),
               SizedBox(height: 5),
               Row(
@@ -211,9 +216,9 @@ class _RegisterPageState extends State<RegisterPage> {
               Text(
                 "Kelas",
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: R.colors.greySubtitle),
               ),
               SizedBox(height: 5),
               Container(
@@ -242,7 +247,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(height: 5),
-              RegisterTextField(
+              EditProfileTextField(
                 hintText: 'Nama Sekolah',
                 title: "Nama Sekolah",
                 controller: schoolNameController,
@@ -256,8 +261,8 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-class RegisterTextField extends StatelessWidget {
-  const RegisterTextField({
+class EditProfileTextField extends StatelessWidget {
+  const EditProfileTextField({
     Key? key,
     required this.title,
     required this.hintText,
@@ -271,36 +276,31 @@ class RegisterTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: R.colors.greySubtitle),
           ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: Colors.white,
-            border: Border.all(color: R.colors.greyBorder),
-          ),
-          child: TextField(
+          SizedBox(height: 5),
+          TextField(
             enabled: enabled,
             controller: controller,
             decoration: InputDecoration(
-                border: InputBorder.none,
+                // border: InputBorder.none,
                 hintText: hintText,
                 hintStyle: TextStyle(
                   color: R.colors.greyHintText,
                 )),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

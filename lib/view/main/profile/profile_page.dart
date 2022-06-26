@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:apps_education/constants/setting_Reusable.dart';
-import 'package:apps_education/helpers/preference_helper.dart';
-import 'package:apps_education/models/email_user.dart';
-import 'package:apps_education/view/login_page.dart';
-import 'package:apps_education/view/main/profile/edit_profile.dart';
+import 'package:latsol/constants/r.dart';
+import 'package:latsol/helpers/preference_helper.dart';
+import 'package:latsol/models/user_by_email.dart';
+import 'package:latsol/view/login_page.dart';
+import 'package:latsol/view/main/profile/edit_profile_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -16,7 +16,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  DataUser? user;
+  UserData? user;
   getUserData() async {
     final data = await PreferenceHelper().getUserData();
     user = data;
@@ -25,6 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     getUserData();
   }
@@ -33,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Akun Saya"),
+        title: Text("Akun Saya"),
         centerTitle: true,
         actions: [
           TextButton(
@@ -48,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 getUserData();
               }
             },
-            child: const Text(
+            child: Text(
               "Edit",
               style: TextStyle(
                 color: Colors.white,
@@ -62,15 +63,15 @@ class _ProfilePageState extends State<ProfilePage> {
           : Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(
+                  padding: EdgeInsets.only(
                     top: 28,
                     bottom: 60,
                     right: 15,
                     left: 15,
                   ),
                   decoration: BoxDecoration(
-                    color: Setting_Reusable.color.primary,
-                    borderRadius: const BorderRadius.only(
+                    color: R.colors.primary,
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(9),
                       bottomRight: Radius.circular(9),
                     ),
@@ -82,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             user!.userName!,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 20,
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
@@ -90,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Text(
                             user!.userAsalSekolah!,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 12,
                               color: Colors.white,
                               fontWeight: FontWeight.w400,
@@ -100,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Image.asset(
-                      Setting_Reusable.asset.imgUser,
+                      R.assets.imgUser,
                       width: 50,
                       height: 50,
                     ),
@@ -117,24 +118,24 @@ class _ProfilePageState extends State<ProfilePage> {
                           blurRadius: 7, color: Colors.black.withOpacity(0.25))
                     ],
                   ),
-                  margin: const EdgeInsets.symmetric(vertical: 18, horizontal: 13),
-                  padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 13),
+                  margin: EdgeInsets.symmetric(vertical: 18, horizontal: 13),
+                  padding: EdgeInsets.symmetric(vertical: 18, horizontal: 13),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Identitas Diri"),
-                      const SizedBox(height: 15),
+                      Text("Identitas Diri"),
+                      SizedBox(height: 15),
                       Text(
                         "Name Lengkap",
                         style: TextStyle(
-                          color: Setting_Reusable.color.greySubtitleHome,
+                          color: R.colors.greySubtitleHome,
                           fontSize: 12,
                         ),
                       ),
                       Text(
                         user!.userName!,
-                        style: const TextStyle(
-                          // color: Setting_Reusable.color.greySubtitleHome,
+                        style: TextStyle(
+                          // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
@@ -142,14 +143,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Email",
                         style: TextStyle(
-                          color: Setting_Reusable.color.greySubtitleHome,
+                          color: R.colors.greySubtitleHome,
                           fontSize: 12,
                         ),
                       ),
                       Text(
                         user!.userEmail!,
-                        style: const TextStyle(
-                          // color: Setting_Reusable.color.greySubtitleHome,
+                        style: TextStyle(
+                          // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
@@ -157,14 +158,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Jenis Kelamin",
                         style: TextStyle(
-                          color: Setting_Reusable.color.greySubtitleHome,
+                          color: R.colors.greySubtitleHome,
                           fontSize: 12,
                         ),
                       ),
                       Text(
                         user!.userGender!,
-                        style: const TextStyle(
-                          // color: Setting_Reusable.color.greySubtitleHome,
+                        style: TextStyle(
+                          // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
@@ -172,13 +173,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Kelas",
                         style: TextStyle(
-                          color: Setting_Reusable.color.greySubtitleHome,
+                          color: R.colors.greySubtitleHome,
                           fontSize: 12,
                         ),
                       ),
                       Text(
-                        user?.jenjang != null ? "10" : "undefined",
-                        style: const TextStyle(
+                        user?.jenjang != null ? "10" : "10",
+                        style: TextStyle(
+                          // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
@@ -186,14 +188,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(
                         "Asal Sekolah",
                         style: TextStyle(
-                          color: Setting_Reusable.color.greySubtitleHome,
+                          color: R.colors.greySubtitleHome,
                           fontSize: 12,
                         ),
                       ),
                       Text(
                         user!.userAsalSekolah!,
-                        style: const TextStyle(
-                          // color: Setting_Reusable.color.greySubtitleHome,
+                        style: TextStyle(
+                          // color: R.colors.greySubtitleHome,
                           fontSize: 13,
                         ),
                       ),
@@ -226,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             color: Colors.black.withOpacity(0.25))
                       ],
                     ),
-                    child: Row(children: const [
+                    child: Row(children: [
                       Icon(
                         Icons.exit_to_app,
                         color: Colors.red,

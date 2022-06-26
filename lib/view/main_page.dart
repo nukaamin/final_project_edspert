@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:apps_education/constants/setting_Reusable.dart';
-import 'package:apps_education/view/main/discussion/message_page.dart';
-import 'package:apps_education/view/main/practice/home.dart';
-import 'package:apps_education/view/main/profile/profile_page.dart';
+import 'package:latsol/constants/r.dart';
+import 'package:latsol/view/main/discussion/chat_page.dart';
+import 'package:latsol/view/main/latihan_soal/home_page.dart';
+import 'package:latsol/view/main/profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Image.asset(
-          Setting_Reusable.asset.icDiscuss,
+          R.assets.icDiscuss,
           width: 30,
         ),
         onPressed: () {
@@ -35,10 +35,10 @@ class _MainPageState extends State<MainPage> {
         controller: _pc,
         physics: NeverScrollableScrollPhysics(),
         
-        children: const [
-          HomePage(), //index ke 0
-          ChatPage(),
-          ProfilePage(), //index ke 1
+        children: [
+          HomePage(), //0
+          // ChatPage(),
+          ProfilePage(), //1
         ],
       ),
     );
@@ -73,7 +73,7 @@ class _MainPageState extends State<MainPage> {
                       child: Column(
                         children: [
                           Image.asset(
-                            Setting_Reusable.asset.icHome,
+                            R.assets.icHome,
                             height: 20,
                             color: index == 0 ? null : Colors.grey,
                           ),
@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage> {
                           Opacity(
                             opacity: 0,
                             child: Image.asset(
-                              Setting_Reusable.asset.icHome,
+                              R.assets.icHome,
                               height: 20,
                             ),
                           ),
@@ -111,6 +111,7 @@ class _MainPageState extends State<MainPage> {
                   child: Material(
                     child: InkWell(
                       onTap: () {
+                        print("profile");
                         index = 1;
                         _pc.animateToPage(
                           index,
@@ -123,9 +124,10 @@ class _MainPageState extends State<MainPage> {
                       child: Column(
                         children: [
                           Image.asset(
-                            Setting_Reusable.asset.icProfile,
+                            "assets/ic_profile.png",
                             height: 20,
-                            color: index == 0 ? null : Colors.grey,
+                            color: index == 1 ? null : Colors.grey,
+
                           ),
                           Text("Profile"),
                         ],

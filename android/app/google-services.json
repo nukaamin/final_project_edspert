@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "750569907009",
-    "project_id": "bootcamp-flutter-final-project",
-    "storage_bucket": "bootcamp-flutter-final-project.appspot.com"
+    "project_number": "506884424199",
+    "project_id": "latsol-edspert",
+    "storage_bucket": "latsol-edspert.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:750569907009:android:523490bb9f813ff277b7c0",
+        "mobilesdk_app_id": "1:506884424199:android:a315fa6614e2c28c75a0a2",
         "android_client_info": {
-          "package_name": "com.example.apps_education"
+          "package_name": "com.example.latsol"
         }
       },
       "oauth_client": [
         {
-          "client_id": "750569907009-64opmdjrjf1m5l26si0e73rv1ju0vcc0.apps.googleusercontent.com",
+          "client_id": "506884424199-ckf8fjeocm7j4tmfb7bhupvf3gc4eid5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAJ6s63VAzIK-7_UeR-H3cktGk1DTzQrxc"
+          "current_key": "AIzaSyBnMrTVE2rfvH7n-kNQai1HdFeAAhw9yf4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "750569907009-64opmdjrjf1m5l26si0e73rv1ju0vcc0.apps.googleusercontent.com",
+              "client_id": "506884424199-ckf8fjeocm7j4tmfb7bhupvf3gc4eid5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

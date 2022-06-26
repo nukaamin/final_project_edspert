@@ -1,6 +1,6 @@
 {
-    "name": "apps_education",
-    "short_name": "apps_education",
+    "name": "latsol",
+    "short_name": "latsol",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
