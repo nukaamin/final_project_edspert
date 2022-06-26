@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750569907009",
+    "project_id": "bootcamp-flutter-final-project",
+    "storage_bucket": "bootcamp-flutter-final-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750569907009:android:523490bb9f813ff277b7c0",
+        "android_client_info": {
+          "package_name": "com.example.apps_education"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750569907009-64opmdjrjf1m5l26si0e73rv1ju0vcc0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJ6s63VAzIK-7_UeR-H3cktGk1DTzQrxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750569907009-64opmdjrjf1m5l26si0e73rv1ju0vcc0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
