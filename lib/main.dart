@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Latihan Soal',
+      title: 'LATSOL-Edspert',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(),
         appBarTheme: AppBarTheme(
