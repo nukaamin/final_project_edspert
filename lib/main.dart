@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/view/login_page.dart';
 import 'package:latsol/view/main/latihan_soal/mapel_page.dart';
 import 'package:latsol/view/main/latihan_soal/paket_soal_page.dart';

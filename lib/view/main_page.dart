@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/view/main/discussion/chat_page.dart';
 import 'package:latsol/view/main/latihan_soal/home_page.dart';
 import 'package:latsol/view/main/profile/profile_page.dart';

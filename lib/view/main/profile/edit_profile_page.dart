@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/helpers/preference_helper.dart';
 import 'package:latsol/helpers/user_email.dart';
 import 'package:latsol/models/network_response.dart';

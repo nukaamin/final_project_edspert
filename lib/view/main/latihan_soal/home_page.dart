@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/helpers/preference_helper.dart';
 import 'package:latsol/models/banner_list.dart';
 import 'package:latsol/models/mapel_list.dart';

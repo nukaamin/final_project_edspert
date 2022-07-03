@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/helpers/preference_helper.dart';
 import 'package:latsol/models/network_response.dart';
 import 'package:latsol/models/user_by_email.dart';

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/helpers/user_email.dart';
 import 'package:latsol/models/network_response.dart';
 import 'package:latsol/models/user_by_email.dart';

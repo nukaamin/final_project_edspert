@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latsol/constants/r.dart';
+import 'package:latsol/constants/reusable.dart';
 import 'package:latsol/models/network_response.dart';
 import 'package:latsol/models/paket_soal_list.dart';
 import 'package:latsol/repository/latihan_soal_api.dart';
