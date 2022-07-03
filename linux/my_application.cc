@@ -7,6 +7,7 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+
 struct _MyApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
